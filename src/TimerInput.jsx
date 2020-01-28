@@ -28,7 +28,7 @@ const TimerInput = ({
         required
       />
     </FormControl>
-    <Button disabled={minutes === '0'} style={{ marginLeft: '1rem' }} color="primary" variant="contained" type="submit">
+    <Button disabled={minutes === 0} style={{ marginLeft: '1rem' }} color="primary" variant="contained" type="submit">
       {isCounting ? 'Clear' : 'Submit'}
     </Button>
   </StyledForm>
