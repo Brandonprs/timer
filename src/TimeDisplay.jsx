@@ -53,10 +53,14 @@ const RateButton = styled(Button)`
 `;
 
 const TimeDisplay = ({
-  minutes, seconds, pause, resume, setRate, rate, paused,
+  secondsLeft, pause, resume, setRate, rate, paused,
 }) => {
-  const shouldBlink = () => (seconds <= 10 && seconds > 0 && minutes === 0);
-  const shouldBeRed = () => (seconds <= 20 && seconds > 0 && minutes === 0);
+  const getSeconds = () => (`0${secondsLeft % 60}`).slice(-2);
+  const getMinutes = () => Math.floor(secondsLeft / 60);
+  const minutes = getMinutes();
+
+  const shouldBlink = () => (secondsLeft <= 10 && secondsLeft > 0 && minutes === 0);
+  const shouldBeRed = () => (secondsLeft <= 20 && secondsLeft > 0 && minutes === 0);
   const iff = (condition, then, otherwise) => (condition ? then : otherwise);
   return (
     <div>
@@ -65,12 +69,12 @@ const TimeDisplay = ({
           blink={shouldBlink()}
           warning={shouldBeRed()}
         >
-          {`${minutes}:${seconds}`}
+          {`${minutes}:${getSeconds()}`}
         </StyledTimeDisplay>
         {
-        seconds > 0
-          ? iff(paused, <StyledPlay onClick={resume} />, <StyledPause onClick={pause} />)
-          : null
+          secondsLeft > 0
+            ? iff(paused, <StyledPlay onClick={resume} />, <StyledPause onClick={pause} />)
+            : null
       }
       </div>
       <div>
@@ -83,8 +87,7 @@ const TimeDisplay = ({
 };
 
 TimeDisplay.propTypes = {
-  minutes: PropTypes.string,
-  seconds: PropTypes.string,
+  secondsLeft: PropTypes.number,
   pause: PropTypes.func,
   resume: PropTypes.func,
   rate: PropTypes.number,
@@ -93,8 +96,7 @@ TimeDisplay.propTypes = {
 };
 
 TimeDisplay.defaultProps = {
-  minutes: '0',
-  seconds: '0',
+  secondsLeft: 0,
   pause: () => {},
   resume: () => {},
   rate: 1000,

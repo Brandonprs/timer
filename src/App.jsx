@@ -20,7 +20,7 @@ const AlertText = styled.p`
 
 const App = () => {
   const [secondsLeft, setSecondsLeft] = useState(0);
-  const [minutes, setMinutes] = useState('0');
+  const [minutes, setMinutes] = useState(0);
   const [rate, setRate] = useState(1000);
   const [paused, setPaused] = useState(false);
   const [isCounting, setIsCounting] = useState(false);
@@ -39,9 +39,6 @@ const App = () => {
       clearInterval(countdownInterval);
     };
   }, [secondsLeft]);
-
-  const getSeconds = () => (`0${secondsLeft % 60}`).slice(-2);
-  const getMinutes = () => (Math.floor(secondsLeft / 60).toString());
 
   const handlePause = () => {
     setPaused(true);
@@ -69,7 +66,7 @@ const App = () => {
   };
 
   const handleChange = e => {
-    setMinutes(e.target.value);
+    setMinutes(parseInt(e.target.value, 10));
     setIsCounting(false);
   };
 
@@ -90,8 +87,7 @@ const App = () => {
         secondsLeft === 0 && isCounting ? <AlertText>Time is up!</AlertText> : null
       }
       <TimeDisplay
-        seconds={getSeconds()}
-        minutes={getMinutes()}
+        secondsLeft={secondsLeft}
         pause={handlePause}
         paused={paused}
         resume={handleResume}

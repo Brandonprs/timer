@@ -35,14 +35,14 @@ const TimerInput = ({
 );
 
 TimerInput.propTypes = {
-  minutes: PropTypes.string,
+  minutes: PropTypes.number,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   isCounting: PropTypes.bool,
 };
 
 TimerInput.defaultProps = {
-  minutes: '0',
+  minutes: 0,
   handleChange: () => {},
   handleSubmit: () => {},
   isCounting: false,
