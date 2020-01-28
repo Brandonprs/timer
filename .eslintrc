@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "prefer-const": "off",
+    "no-return-assign": "off",
+    "arrow-parens": [2, "as-needed"],
+    "no-nested-ternary": "off"
+  }
+}
