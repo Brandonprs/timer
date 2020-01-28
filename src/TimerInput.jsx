@@ -12,9 +12,9 @@ const StyledForm = styled.form`
 `;
 
 const TimerInput = ({
-  minutes, handleChange, handleSubmit, isCounting,
+  minutes, handleChange, handleSubmit, resetCounter, isCounting,
 }) => (
-  <StyledForm onSubmit={handleSubmit}>
+  <StyledForm onSubmit={isCounting ? resetCounter : handleSubmit}>
     <FormControl>
       <InputLabel htmlFor="timer">Countdown (minutes)</InputLabel>
       <Input
@@ -38,6 +38,7 @@ TimerInput.propTypes = {
   minutes: PropTypes.number,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
+  resetCounter: PropTypes.func,
   isCounting: PropTypes.bool,
 };
 
@@ -45,6 +46,7 @@ TimerInput.defaultProps = {
   minutes: 0,
   handleChange: () => {},
   handleSubmit: () => {},
+  resetCounter: () => {},
   isCounting: false,
 };
 

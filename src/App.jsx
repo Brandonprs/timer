@@ -50,19 +50,21 @@ const App = () => {
     setSecondsLeft(secondsLeft - 1);
   };
 
+
+  const resetCounter = e => {
+    e.preventDefault();
+    setPaused(false);
+    setSecondsLeft(0);
+    setIsCounting(false);
+    setMinutes(0);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    if (isCounting) {
-      setPaused(false);
-      setSecondsLeft(0);
-      setIsCounting(false);
-      setMinutes(0);
-    } else {
-      setPaused(false);
-      setIsCounting(true);
-      const minutesToSeconds = minutes * 60;
-      setSecondsLeft(minutesToSeconds - 1);
-    }
+    setPaused(false);
+    setIsCounting(true);
+    const minutesToSeconds = minutes * 60;
+    setSecondsLeft(minutesToSeconds - 1);
   };
 
   const handleChange = e => {
@@ -77,6 +79,7 @@ const App = () => {
         minutes={minutes}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
+        resetCounter={resetCounter}
       />
       {
         secondsLeft <= halfOriginal
